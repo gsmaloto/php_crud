@@ -1,8 +1,7 @@
 <?php
 include('../include/db.php');
 
-$id = $_GET['id'];
-
+$id = $_GET['id'];;
 // SELECT QUERY
 $querySelect = mysqli_query($conn, "SELECT first_name, last_name, username FROM user WHERE id = $id") or die('Query Error');
 $row = mysqli_fetch_array($querySelect) or die('fetch Error');
@@ -29,7 +28,7 @@ if (isset($_POST['update'])) {
     $errorMsg = '<div class="alert alert-success" role="alert">
                       ' . $row['first_name'] . '  ' . $row['last_name'] . ' updated successfully!
                   </div>';
-    header("Location: ../dashboard.php");
+    header("Location: index.php");
   }
 }
 

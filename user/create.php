@@ -3,12 +3,15 @@ include('../include/db.php');
 
 $errorMsg = $matchMsg = "";
 
+
+
 if (isset($_POST['add'])) {
-  $firstName = $_POST['fistName'];
-  $lastName = $_POST['lastName'];
+  $firstName = ucwords($_POST['fistName']);
+  $lastName = ucwords($_POST['lastName']);
   $username = $_POST['username'];
   $password = $_POST['password'];
   $confirmPw = $_POST['confirmPw'];
+
 
   if (empty($firstName) || empty($lastName) || empty($username) || empty($password) || empty($confirmPw)) {
     $errorMsg = '<div class="alert alert-danger" role="alert">
@@ -29,6 +32,13 @@ if (isset($_POST['add'])) {
       $errorMsg = '<div class="alert alert-success" role="alert">
                       User added successfully!
                   </div>';
+
+      $firstName = "";
+      $lastName = "";
+      $username = "";
+      $password = "";
+      $confirmPw = "";
+
       header('create.php');
     }
   }
@@ -65,7 +75,7 @@ if (isset($_POST['add'])) {
       </div>
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
-        <input type="password" class="form-control" id="username" name="username" value=<?= isset($_POST['add']) ? $username : '' ?>>
+        <input type="text" class="form-control" id="username" name="username" value=<?= isset($_POST['add']) ? $username : '' ?>>
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
@@ -76,7 +86,8 @@ if (isset($_POST['add'])) {
         <input type="password" class="form-control" id="confirmPassword" name="confirmPw">
         <?= $matchMsg ?? $matchMsg  ?>
       </div>
-      <button type="submit" class="btn btn-primary w-100" name="add">Add</button>
+      <button type="submit" class="btn btn-primary w-100 mb-3" name="add">Add</button>
+      <a class="btn btn-secondary w-100" href="index.php">Back</a>
     </form>
   </div>
 </body>
